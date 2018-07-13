@@ -1,6 +1,5 @@
 var app = angular.module("EmployeeManagement", []);
  
-// Controller Part
 app.controller("EmployeeController", function($scope, $http) {
  
  
@@ -11,11 +10,9 @@ app.controller("EmployeeController", function($scope, $http) {
         empName: ""
     };
  
-    // Now load the data from server
+   
     _refreshEmployeeData();
  
-    // HTTP POST/PUT methods for add/edit employee  
-    // Call: http://localhost:9009/employee
     $scope.submitEmployee = function() {
  
         var method = "";
@@ -43,8 +40,6 @@ app.controller("EmployeeController", function($scope, $http) {
         _clearFormData();
     }
  
-    // HTTP DELETE- delete employee by Id
-    // Call: http://localhost:9009/employee/{empId}
     $scope.deleteEmployee = function(employee) {
         $http({
             method: 'DELETE',
@@ -52,16 +47,12 @@ app.controller("EmployeeController", function($scope, $http) {
         }).then(_success, _error);
     };
  
-    // In case of edit
     $scope.editEmployee = function(employee) {
         $scope.employeeForm.empId = employee.empId;
         $scope.employeeForm.empNo = employee.empNo;
         $scope.employeeForm.empName = employee.empName;
     };
  
-    // Private Method  
-    // HTTP GET- get all employees collection
-    // Call: http://localhost:9009/employees
     function _refreshEmployeeData() {
         $http({
             method: 'GET',
@@ -88,8 +79,7 @@ app.controller("EmployeeController", function($scope, $http) {
         var config = res.config;
         alert("Error: " + status + ":" + data);
     }
- 
-    // Clear the form
+
     function _clearFormData() {
         $scope.employeeForm.empId = -1;
         $scope.employeeForm.empNo = "";
